@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="titlebar_bg">#59b273</color>
+    <color name="titlebar_tv">#ffffff</color>
+    <color name="tabhost_tv1">#4f4f4f</color>
+	<color name="tabhost_bg">#e7e7e7</color>
+	<color name="qingxin_childrenbg">#f8f7f7</color>
+	<color name="qingxin_childrentv1">#777777</color>
+	<color name="qingxin_childrentv2">#fe695e</color>
+	<color name="qingxin_grouptv1">#ababab</color>
+	<color name="map_name0">#088474</color>
+	<color name="map_name1">#f7c6ee</color>
+	<color name="map_name2">#93d0e6</color>
+	<color name="map_name3">#a8a8a8</color>
+	<color name="map_name4">#baa4e0</color>
+	<color name="map_name5">#bfbd00</color>
+	<color name="map_name6">#f08b8e</color>
+	<color name="map_name7">#88ca73</color>
+	<color name="map_name8">#fdc782</color>
+	<color name="map_name9">#85c2d8</color>
+	<color name="map_toum">#00ffffff</color>
+	<color name="map_tvbb">#ff6861</color>
+	<color name="map_viemline">#aaa8a8a8</color>
+	<color name="notify_timebg">#f1f1f1</color>
+	<color name="time_eb">#ebebeb</color>
+	<color name="tese_tv">#944f4f4f</color>
+	<color name="text_colors">#666666</color>
+	<color name="map_bg">#f9f9f9</color>
+	<color name="map_shareline">#999999</color>
+	<color name="goumai_bg">#ee4444</color>
+	<color name="ticket_line">#d7d7d7</color>
+	<color name="bottom_line">#dadada</color>
+	<color name="bottom_bg">#f7f7f7</color>
+	<color name="list_line">#ededed</color>
+	<color name="text_1f">#1f1f1f</color>
+	<color name="text_6c">#6c6c6c</color>
+	<color name="text_92">#929292</color>
+	<color name="text_a5">#a5a5a5</color>
+	<color name="line_e4">#e4e4e4</color>
+	<color name="text_1e">#1e6a35</color>
+</resources>

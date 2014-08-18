@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
+    
+    <ImageView android:id="@+id/iv_view_line"
+        android:layout_width="15dp"
+        android:layout_height="fill_parent"
+        android:src="@drawable/line_height"
+        android:scaleType="fitXY"
+        android:layout_centerHorizontal="true"/>
+   <RelativeLayout android:id="@+id/rel_layout_left"
+       android:layout_width="match_parent"
+       android:layout_height="120dp"
+       android:layout_toLeftOf="@id/iv_view_line">
+       
+        <include
+            android:id="@+id/view_left"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            layout="@layout/scenerylistleft" />
+   </RelativeLayout>
+   
+   <RelativeLayout android:id="@+id/rel_layout_right"
+       android:layout_width="match_parent"
+       android:layout_height="120dp"
+       android:layout_marginTop="40dp"
+       android:layout_toRightOf="@id/iv_view_line">
+       
+        <include
+            android:id="@+id/view_right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layout="@layout/scenerylistleft" />
+   </RelativeLayout>
+   
+   
+   <ImageView android:id="@+id/iv_line_left"
+       android:layout_width="12dp"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="30dp"
+       android:src="@drawable/circle_line"
+       android:layout_centerHorizontal="true"/>
+   
+</RelativeLayout>
