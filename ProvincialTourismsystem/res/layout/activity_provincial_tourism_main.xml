@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/titlebar_tv"
+    tools:context=".Provincial_ClearIndexActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/titlebar_tv"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            layout="@layout/titles" />
+
+        <ExpandableListView
+            android:id="@+id/expandableListView1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:divider="@color/map_toum"
+            android:scrollingCache="false" >
+        </ExpandableListView>
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            layout="@layout/bottom_bnt" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -3,7 +3,13 @@ package com.share.sharedemo;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	private int[] images = { R.drawable.yuding_0201, R.drawable.yuding_0202,
@@ -27,8 +33,59 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		showView();
+	}
 
-		
+	//¶¯Ì¬¼ÓÔØ×óÓÒ¿Ø¼þ
+	private void showView() {
+		RelativeLayout rl = (RelativeLayout) findViewById(R.id.rel_view_rellayout);
+		int height = dip2Px(this, 150);
+		for (int i = 0; i < images.length; i++) {
+			if (i % 2 == 0) {// ×ó±ß
+				RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(
+						ViewGroup.LayoutParams.FILL_PARENT, height);
+				param.topMargin = (i / 2) * height;
+				View view = getLayoutInflater().inflate(
+						R.layout.scenerylistleft, null);
+				initLeftWidget(view, i);
+				rl.addView(view, param);
+
+			} else {// ÓÒ±ß
+				RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(
+						ViewGroup.LayoutParams.FILL_PARENT, height);
+				param.topMargin = ((i - 1) / 2) * height + dip2Px(this, 50);
+				View view = getLayoutInflater().inflate(
+						R.layout.scenerylistright, null);
+				initRightWidget(view, i);
+				rl.addView(view, param);
+			}
+		}
+	}
+	
+	//×ó±ß¿Ø¼þ¸³Öµ
+	private void initLeftWidget(View view,int i){
+		ImageView img = (ImageView) view.findViewById(R.id.iv_view_sceneryleft_image);
+		TextView title = (TextView) view.findViewById(R.id.tv_view_left_title);
+		TextView info = (TextView) view.findViewById(R.id.tv_view_left_info);
+		img.setImageResource(images[i]);
+		title.setText(date[i][0]);
+		info.setText(date[i][1]);
+	}
+	
+	//ÓÒ±ß¿Ø¼þ¸³Öµ
+	private void initRightWidget(View view,int i){
+		ImageView img = (ImageView) view.findViewById(R.id.iv_view_sceneryright_image);
+		TextView title = (TextView) view.findViewById(R.id.tv_view_right_title);
+		TextView info = (TextView) view.findViewById(R.id.tv_view_right_info);
+		img.setImageResource(images[i]);
+		title.setText(date[i][0]);
+		info.setText(date[i][1]);
+	}
+	
+	//dp×ª»»³Épx
+	public static int dip2Px(Context context, float dpValue) {
+		float scale = context.getResources().getDisplayMetrics().density;
+		return (int) (dpValue * scale + 0.5f);
 	}
 
 	@Override

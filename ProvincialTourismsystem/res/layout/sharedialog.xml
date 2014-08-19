@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/map_toum" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/titlebar_tv"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:text="@string/sharedialog_t0"
+        android:textSize="@dimen/qingxin_tv24" />
+
+    <LinearLayout
+        android:id="@+id/middles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/titlebar_tv"
+        android:orientation="horizontal" >
+
+        <Button
+            style="@style/share_bntstly"
+            android:drawableTop="@drawable/share_sina"
+            android:text="@string/sharedialog_t1" />
+
+        <Button
+            style="@style/share_bntstly"
+            android:drawableTop="@drawable/share_wx"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/sharedialog_t2" />
+
+        <Button
+            style="@style/share_bntstly"
+            android:drawableTop="@drawable/share_friend"
+            android:text="@string/sharedialog_t3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/middles"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/titlebar_tv"
+        android:id="@+id/aa"
+        android:orientation="horizontal" >
+
+        <Button
+            style="@style/share_bntstly"
+            android:drawableTop="@drawable/share_qq"
+            android:text="@string/sharedialog_t4" />
+
+        <Button
+            style="@style/share_bntstly"
+            android:drawableTop="@drawable/share_qzone"
+             android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/sharedialog_t5" />
+
+        <Button
+            style="@style/share_bntstly"
+            android:drawableTop="@drawable/share_mail"
+            android:text="@string/sharedialog_t6" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_below="@+id/aa"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_centerHorizontal="true"
+         />
+
+</RelativeLayout>
