@@ -34,16 +34,6 @@
              />
 
         <Button
-            android:id="@+id/bnt_41"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_below="@+id/bnt_61"
-            android:background="@color/map_toum"
-            android:layout_centerHorizontal="true"
-            android:onClick="toLocation"
-             />
-
-        <Button
             android:id="@+id/bnt_11"
             android:layout_width="80dp"
             android:layout_height="70dp"
@@ -97,6 +87,15 @@
             android:layout_below="@+id/bnt_61"
             android:background="@color/map_toum"
             android:layout_toLeftOf="@+id/bnt_41"
+            android:onClick="toLocation" />
+
+        <Button
+            android:id="@+id/bnt_41"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/bnt_31"
+            android:layout_centerHorizontal="true"
+            android:background="@color/map_toum"
             android:onClick="toLocation" />
         
     </RelativeLayout>

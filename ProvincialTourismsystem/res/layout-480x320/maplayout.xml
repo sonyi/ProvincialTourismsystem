@@ -18,8 +18,8 @@
             android:layout_alignParentTop="true"
             android:layout_marginRight="15dp"
             android:layout_marginTop="70dp"
-            android:onClick="toLocation"
             android:background="@color/map_toum"
+            android:onClick="toLocation"
             />
 
         <Button
@@ -34,32 +34,22 @@
              />
 
         <Button
-            android:id="@+id/bnt_41"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_below="@+id/bnt_61"
-            android:background="@color/map_toum"
-            android:layout_centerHorizontal="true"
-            android:onClick="toLocation"
-             />
-
-        <Button
             android:id="@+id/bnt_11"
-            android:layout_width="80dp"
-            android:layout_height="70dp"
+            android:layout_width="90dp"
+            android:layout_height="60dp"
             android:layout_below="@+id/bnt_91"
-            android:layout_marginTop="7dp"
             android:background="@color/map_toum"
-            android:layout_toRightOf="@+id/bnt_31"
+            android:layout_marginTop="7dp"
+            android:layout_toRightOf="@+id/sas"
             android:onClick="toLocation" />
 
         <Button
             android:id="@+id/bnt_81"
             android:layout_width="90dp"
-            android:background="@color/map_toum"
             android:layout_height="80dp"
             android:layout_above="@+id/bnt_71"
             android:layout_centerHorizontal="true"
+            android:background="@color/map_toum"
             android:onClick="toLocation" />
 
         <Button
@@ -67,36 +57,54 @@
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_alignLeft="@+id/bnt_11"
+            android:background="@color/map_toum"
             android:layout_below="@+id/bnt_11"
-            android:background="@color/map_toum"
             android:onClick="toLocation" />
 
-        <Button
-            android:id="@+id/bnt_31"
-            android:layout_width="80dp"
-            android:layout_height="50dp"
-            android:layout_alignBaseline="@+id/bnt_61"
-            android:layout_alignBottom="@+id/bnt_61"
-            android:background="@color/map_toum"
-            android:layout_alignRight="@+id/bnt_81"
-            android:onClick="toLocation" />
+        <LinearLayout
+            android:id="@+id/sas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/bnt_21"
+            android:layout_centerHorizontal="true"
+            
+            android:layout_marginTop="10dp"
+            android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/bnt_71"
-            android:layout_width="140dp"
-            android:layout_height="80dp"
-            android:layout_alignBottom="@+id/bnt_11"
-            android:layout_alignRight="@+id/bnt_41"
-            android:background="@color/map_toum"
-            android:onClick="toLocation" />
+            <Button
+                android:id="@+id/bnt_31"
+                android:layout_width="50dp"
+                android:background="@color/map_toum"
+                android:layout_height="60dp"
+                android:onClick="toLocation" />
+
+            <Button
+                android:id="@+id/bnt_41"
+                android:layout_width="40dp"
+                android:background="@color/map_toum"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:onClick="toLocation" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/bnt_51"
             android:layout_width="70dp"
-            android:layout_height="90dp"
-            android:layout_below="@+id/bnt_61"
             android:background="@color/map_toum"
-            android:layout_toLeftOf="@+id/bnt_41"
+            android:layout_height="90dp"
+            android:layout_alignRight="@+id/sas"
+            android:layout_below="@+id/bnt_61"
+            android:layout_marginRight="35dp"
+            android:onClick="toLocation" />
+
+        <Button
+            android:id="@+id/bnt_71"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:background="@color/map_toum"
+            android:layout_alignBaseline="@+id/bnt_11"
+            android:layout_alignBottom="@+id/bnt_11"
+            android:layout_alignRight="@+id/bnt_51"
             android:onClick="toLocation" />
         
     </RelativeLayout>

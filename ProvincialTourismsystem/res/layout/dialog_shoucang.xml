@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/titlebar_tv" >
+    android:background="@color/map_toum" >
 
     <TextView
         android:id="@+id/textView1"
@@ -12,7 +12,8 @@
         android:layout_centerHorizontal="true"
         android:background="@color/titlebar_tv"
         android:gravity="center"
-        android:paddingTop="20dp"
+        android:paddingTop="10dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/dialog_shouc"
         android:textSize="@dimen/qingxin_tv24" />
 
@@ -55,25 +56,20 @@
             android:textSize="@dimen/title_bar_tv_18" />
     </LinearLayout>
 
-    <View
+    <TextView
         android:id="@+id/mid"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="1dp"
         android:layout_below="@+id/middles"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_centerHorizontal="true"
         android:background="@color/notify_timebg" />
 
     <LinearLayout
         android:id="@+id/as"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/mid"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:background="@color/titlebar_tv"
         android:orientation="horizontal" >
 
@@ -86,21 +82,15 @@
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
+            android:textSize="@dimen/qingxin_tv17"
             android:background="@color/notify_timebg" />
 
         <Button
             style="@style/map_viewbnt"
             android:layout_weight="1"
             android:onClick="dialog_click"
+            android:textSize="@dimen/qingxin_tv17"
             android:text="@string/dialog_qued" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="15dp"
-        android:layout_below="@+id/as"
-        android:layout_centerHorizontal="true" />
-
 
 </RelativeLayout>

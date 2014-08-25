@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/tv_car_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="当前施工车辆:"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tv_car_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tv_car_title"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/tv_car_title"
+        android:text="闽DSC502"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tv_car_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_car_title"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="当前施工人员:"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tv_car_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tv_car_user"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/tv_car_user"
+        android:text="当前施工人员:"
+        android:textSize="25sp" />
+
+</RelativeLayout>

@@ -59,7 +59,7 @@
         android:gravity="center_horizontal"
         android:maxLength="20"
         android:singleLine="true"
-        android:text="dsaasdssss"
+        android:text="@string/dsaasdssss"
         android:textColor="#59b273"
         android:textSize="16sp" />
 

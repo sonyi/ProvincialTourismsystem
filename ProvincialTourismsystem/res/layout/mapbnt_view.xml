@@ -32,6 +32,8 @@
                 android:id="@+id/mapbnt_2"
                 style="@style/map_bnt"
                 android:onClick="clickbnt"
+                android:drawablePadding="-3dp"
+                android:paddingLeft="8dp"
                 android:drawableLeft="@drawable/mapmenu_2"
                 android:text="@string/map_bnt2" />
 
@@ -89,6 +91,8 @@
                 style="@style/map_bnt"
                 android:drawableLeft="@drawable/mapmenu_6"
                 android:onClick="clickbnt"
+                android:drawablePadding="-3dp"
+                android:paddingLeft="8dp"
                 android:text="@string/map_bnt6" />
 
             <com.funo.provincialtourism.view.DashedLineView1
@@ -113,6 +117,8 @@
                 style="@style/map_bnt"
                 android:drawableLeft="@drawable/mapmenu_8"
                 android:onClick="clickbnt"
+                android:drawablePadding="-3dp"
+                android:paddingLeft="8dp"
                 android:text="@string/map_bnt8" />
         </LinearLayout>
 

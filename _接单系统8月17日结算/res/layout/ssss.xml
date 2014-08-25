@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#c8d0fe"
+    >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="45dp" 
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/cat"
+            android:gravity="center"
+            android:text="消费项目"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+             />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/cat"
+            android:text="金额(元)"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/cat"
+            android:gravity="center"
+            android:text="日期"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/getcost_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" 
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/goutongchild">
+
+    </ListView>
+
+</RelativeLayout>

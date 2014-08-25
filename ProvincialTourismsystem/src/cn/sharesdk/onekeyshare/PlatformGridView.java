@@ -1,24 +1,21 @@
-/*
- * 官网地站:http://www.ShareSDK.cn
- * 技术支持QQ: 4006852216
- * 官方微信:ShareSDK   （如果发布新版本的话，我们将会第一时间通过微信将版本更新内容推送给您。如果使用过程中有任何问题，也可以通过微信与我们取得联系，我们将会在24小时内给予回复）
- *
- * Copyright (c) 2013年 ShareSDK.cn. All rights reserved.
- */
-
 package cn.sharesdk.onekeyshare;
 
-import static cn.sharesdk.framework.utils.R.*;
+import static cn.sharesdk.framework.utils.R.getBitmapRes;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
 import m.framework.ui.widget.viewpager.ViewPagerAdapter;
 import m.framework.ui.widget.viewpager.ViewPagerClassic;
+import android.R;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler.Callback;
 import android.os.Message;
@@ -33,9 +30,12 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.sharesdk.framework.CustomPlatform;
+import cn.sharesdk.framework.FakeActivity;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.framework.utils.UIHandler;
+
+
 
 /** 平台宫格列表显示工具。 */
 public class PlatformGridView extends LinearLayout implements
@@ -65,7 +65,6 @@ public class PlatformGridView extends LinearLayout implements
 	private HashMap<String, String> hiddenPlatforms;
 	private View bgView;
 	private long lastClickTime;
-
 	public PlatformGridView(Context context) {
 		super(context);
 		init(context);
@@ -75,20 +74,24 @@ public class PlatformGridView extends LinearLayout implements
 		super(context, attrs);
 		init(context);
 	}
-
+	
+	
+	
+	
+	
 	private void init(final Context context) {
 		calPageSize();
 		setOrientation(VERTICAL);
-
+		
 		pager = new ViewPagerClassic(context);
 		disableOverScrollMode(pager);
-		pager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		addView(pager);
 
 		// 为了更好的ui效果，开启子线程获取平台列表
 		new Thread() {
 			public void run() {
 				platformList = ShareSDK.getPlatformList();
+				System.out.println(platformList.length);
 				if (platformList == null) {
 					platformList = new Platform[0];
 				}
@@ -96,7 +99,7 @@ public class PlatformGridView extends LinearLayout implements
 			}
 		}.start();
 	}
-
+	
 	private void calPageSize() {
 		float scrW = cn.sharesdk.framework.utils.R.getScreenWidth(getContext());
 		float scrH = cn.sharesdk.framework.utils.R.getScreenHeight(getContext());
@@ -254,11 +257,19 @@ public class PlatformGridView extends LinearLayout implements
 			page.setBackGround(bgView);
 			bgView = null;
 			page.setShareData(reqData);
-			page.setParent(parent);
 			if ("true".equals(String.valueOf(reqData.get("dialogMode")))) {
 				page.setDialogMode();
 			}
-			page.show(parent.getContext(), null);
+			page.showForResult(parent.getContext(), null, new FakeActivity() {
+				public void onResult(HashMap<String, Object> data) {
+					if (data != null && data.containsKey("editRes")) {
+						@SuppressWarnings("unchecked")
+						HashMap<Platform, HashMap<String, Object>> editRes
+								= (HashMap<Platform, HashMap<String, Object>>) data.get("editRes");
+						parent.share(editRes);
+					}
+				}
+			});
 			parent.finish();
 		}
 	}
@@ -371,6 +382,7 @@ public class PlatformGridView extends LinearLayout implements
 	}
 
 	/** 简易的宫格列表控件 */
+	@SuppressLint("ResourceAsColor")
 	private static class GridView extends LinearLayout {
 		private Object[] beans;
 		private OnClickListener callback;
@@ -417,12 +429,16 @@ public class PlatformGridView extends LinearLayout implements
 					final int index = i * COLUMN_PER_LINE + j;
 					if (index >= size) {
 						LinearLayout llItem = new LinearLayout(getContext());
+						//llItem.setBackgroundColor(R.color.background_light);
 						llItem.setLayoutParams(lp);
 						llLine.addView(llItem);
 						continue;
 					}
 
 					final LinearLayout llItem = getView(index, callback, getContext());
+					if(null==llItem){
+						continue;
+					}
 					llItem.setTag(beans[index]);
 					llItem.setLayoutParams(lp);
 					llLine.addView(llItem);
@@ -436,6 +452,9 @@ public class PlatformGridView extends LinearLayout implements
 			OnClickListener listener;
 			if (beans[position] instanceof Platform) {
 				logo = getIcon((Platform) beans[position]);
+				if(null==logo){
+					return null;
+				}
 				label = getName((Platform) beans[position]);
 				listener = ocL;
 			} else {
@@ -449,6 +468,7 @@ public class PlatformGridView extends LinearLayout implements
 
 			ImageView iv = new ImageView(context);
 			int dp_5 = cn.sharesdk.framework.utils.R.dipToPx(context, 5);
+			int dp_10 = cn.sharesdk.framework.utils.R.dipToPx(context, 10);
 			iv.setPadding(dp_5, dp_5, dp_5, dp_5);
 			iv.setScaleType(ScaleType.CENTER_INSIDE);
 			LinearLayout.LayoutParams lpIv = new LinearLayout.LayoutParams(
@@ -460,7 +480,7 @@ public class PlatformGridView extends LinearLayout implements
 			ll.addView(iv);
 
 			TextView tv = new TextView(context);
-			tv.setTextColor(0xffffffff);
+			tv.setTextColor(Color.BLACK);
 			tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
 			tv.setSingleLine();
 			tv.setIncludeFontPadding(false);
@@ -468,7 +488,7 @@ public class PlatformGridView extends LinearLayout implements
 					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			lpTv.gravity = Gravity.CENTER_HORIZONTAL;
 			lpTv.weight = 1;
-			lpTv.setMargins(dp_5, 0, dp_5, dp_5);
+			lpTv.setMargins(dp_5, dp_10, dp_5, dp_5);
 			tv.setLayoutParams(lpTv);
 			tv.setText(label);
 			ll.addView(tv);
@@ -487,8 +507,25 @@ public class PlatformGridView extends LinearLayout implements
 				return null;
 			}
 
-			String resName = "logo_" + plat.getName();
-			int resId = getBitmapRes(getContext(), resName);
+			String resName = plat.getName();
+			if(resName.equals("WechatMonents")){
+				return null;
+			}
+			if(resName.equals("SinaWeibo")){
+				resName="share_sina";
+			}else if(resName.equals("QZone")){
+				resName="share_qzone";
+			}else if(resName.equals("Wechat")){
+				resName="share_wx";
+			}else if(resName.equals("WechatMoments")){
+				resName="share_friend";
+			}else if(resName.equals("QQ")){
+				resName="share_qq";
+			}else if(resName.equals("ShortMessage")){
+				resName="share_mail";
+			}
+			//int resId=getBitmapRes(getContext(), resName);
+			int resId=getContext().getResources().getIdentifier(getContext().getPackageName()+":drawable/"+resName, null, null);
 			return BitmapFactory.decodeResource(getResources(), resId);
 		}
 

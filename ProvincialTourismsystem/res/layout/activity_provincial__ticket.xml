@@ -27,7 +27,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="@string/ticket_title1" />
+                android:text="@string/ticket_title1"
+                android:textSize="@dimen/qingxin_tv17" />
 
             <Button
                 android:id="@+id/button1"
@@ -38,18 +39,19 @@
                 android:background="@drawable/map_viewsshape"
                 android:drawableRight="@drawable/more"
                 android:gravity="left|center_vertical"
+                android:onClick="tickList"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/ticket_title2"
-                android:onClick="tickList"
-                android:textSize="@dimen/tabhost_tv_13" />
+                android:textSize="@dimen/notify_tv15" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="@string/ticket_title3" />
+                android:text="@string/ticket_title3"
+                android:textSize="@dimen/qingxin_tv17" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -190,24 +192,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:orientation="vertical" >
 
                 <TextView
                     android:id="@+id/textView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@color/titlebar_bg"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:text="@string/ticket_title4"
-                    android:textColor="@color/titlebar_tv" />
+                    android:textSize="@dimen/qingxin_tv17" />
 
                 <ListView
                     android:id="@+id/ticket_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:divider="@color/map_toum"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/map_viewsshape"
+                    android:divider="@color/ticket_line"
+                    android:dividerHeight="0.5dp"
                     android:listSelector="@drawable/listselect" >
                 </ListView>
             </LinearLayout>

@@ -8,12 +8,19 @@
 
 package cn.sharesdk.onekeyshare;
 
-import static cn.sharesdk.framework.utils.R.*;
-import static cn.sharesdk.framework.utils.BitmapHelper.*;
+import static cn.sharesdk.framework.utils.BitmapHelper.captureView;
+import static cn.sharesdk.framework.utils.R.getBitmapRes;
+import static cn.sharesdk.framework.utils.R.getStringRes;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
+
+import com.funo.antennatestsystem.R;
+
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -22,8 +29,8 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.os.Message;
 import android.os.Handler.Callback;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -32,13 +39,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.view.animation.Animation.AnimationListener;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import android.widget.FrameLayout.LayoutParams;
 import cn.sharesdk.framework.CustomPlatform;
 import cn.sharesdk.framework.FakeActivity;
 import cn.sharesdk.framework.Platform;
@@ -252,6 +259,7 @@ public class OnekeyShare extends FakeActivity implements
 		this.bgView = bgView;
 	}
 
+	@SuppressLint("ResourceAsColor")
 	public void onCreate() {
 		// 显示方式是由platform和silent两个字段控制的
 		// 如果platform设置了，则无须显示九宫格，否则都会显示；
@@ -268,6 +276,7 @@ public class OnekeyShare extends FakeActivity implements
 				HashMap<Platform, HashMap<String, Object>> shareData
 						= new HashMap<Platform, HashMap<String,Object>>();
 				shareData.put(ShareSDK.getPlatform(name), copy);
+				System.out.println(name);
 				share(shareData);
 			} else if (ShareCore.isUseClientToShare(name)) {
 				HashMap<Platform, HashMap<String, Object>> shareData
@@ -283,14 +292,23 @@ public class OnekeyShare extends FakeActivity implements
 					share(shareData);
 				} else {
 					EditPage page = new EditPage();
+					
 					page.setBackGround(bgView);
 					bgView = null;
 					page.setShareData(copy);
-					page.setParent(this);
 					if (dialogMode) {
 						page.setDialogMode();
 					}
-					page.show(activity, null);
+					page.showForResult(activity, null, new FakeActivity() {
+						public void onResult(HashMap<String, Object> data) {
+							if (data != null && data.containsKey("editRes")) {
+								@SuppressWarnings("unchecked")
+								HashMap<Platform, HashMap<String, Object>> editRes
+										= (HashMap<Platform, HashMap<String, Object>>) data.get("editRes");
+								share(editRes);
+							}
+						}
+					});
 				}
 			}
 			finish();
@@ -300,8 +318,11 @@ public class OnekeyShare extends FakeActivity implements
 		finishing = false;
 		canceled = false;
 		initPageView();
-		initAnim();
-		activity.setContentView(flPage);
+		//initAnim();
+		Dialog dl=new Dialog(activity,R.style.Dialog);
+		dl.setContentView(flPage);
+		dl.show();
+		//activity.setContentView(flPage);
 
 		// 设置宫格列表数据
 		grid.setData(copy, silent);
@@ -311,13 +332,14 @@ public class OnekeyShare extends FakeActivity implements
 		btnCancel.setOnClickListener(this);
 
 		// 显示列表
-		flPage.clearAnimation();
-		flPage.startAnimation(animShow);
-
+		//flPage.clearAnimation();
+		//flPage.startAnimation(animShow);
+        
 		// 打开分享菜单的统计
 		ShareSDK.logDemoEvent(1, null);
 	}
 
+	@SuppressLint("ResourceAsColor")
 	private void initPageView() {
 		flPage = new FrameLayout(getContext());
 		flPage.setOnClickListener(this);
@@ -330,9 +352,9 @@ public class OnekeyShare extends FakeActivity implements
 		};
 		llPage.setOrientation(LinearLayout.VERTICAL);
 		int resId = getBitmapRes(getContext(), "share_vp_back");
-		if (resId > 0) {
-			llPage.setBackgroundResource(resId);
-		}
+//		if (resId > 0) {
+//			llPage.setBackgroundColor(R.color.goumai_bg);
+//		}
 		FrameLayout.LayoutParams lpLl = new FrameLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		lpLl.gravity = Gravity.BOTTOM;
@@ -342,6 +364,7 @@ public class OnekeyShare extends FakeActivity implements
 		// 宫格列表
 		grid = new PlatformGridView(getContext());
 		grid.setEditPageBackground(bgView);
+		
 		LinearLayout.LayoutParams lpWg = new LinearLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		grid.setLayoutParams(lpWg);
@@ -349,7 +372,8 @@ public class OnekeyShare extends FakeActivity implements
 
 		// 取消按钮
 		btnCancel = new Button(getContext());
-		btnCancel.setTextColor(0xffffffff);
+		btnCancel.setTextColor(android.R.color.white);
+		btnCancel.setBackgroundResource(android.R.color.white);
 		btnCancel.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
 		resId = getStringRes(getContext(), "cancel");
 		if (resId > 0) {
@@ -462,16 +486,6 @@ public class OnekeyShare extends FakeActivity implements
 				Message msg = new Message();
 				msg.what = MSG_TOAST;
 				int resId = getStringRes(getContext(), "google_plus_client_inavailable");
-				msg.obj = activity.getString(resId);
-				UIHandler.sendMessage(msg, this);
-				continue;
-			}
-
-			boolean isQQ = "QQ".equals(name);
-			if (isQQ && !plat.isValid()) {
-				Message msg = new Message();
-				msg.what = MSG_TOAST;
-				int resId = getStringRes(getContext(), "qq_client_inavailable");
 				msg.obj = activity.getString(resId);
 				UIHandler.sendMessage(msg, this);
 				continue;

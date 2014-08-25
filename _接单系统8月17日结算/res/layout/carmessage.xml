@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <EditText
+        android:id="@+id/car_carid"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_toRightOf="@+id/textView1"
+        android:textSize="16sp"
+        android:ems="10"
+        android:enabled="false" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/car_carframnum"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/car_carframnums"
+        android:layout_alignBottom="@+id/car_carframnums"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/car_carframnums"
+        android:textSize="16sp"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/car_carframnums"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView1"
+        android:layout_marginLeft="22dp"
+        android:layout_toRightOf="@+id/car_carid"
+        android:textSize="20dp"
+        android:text="车 架 号:" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/car_carframnum"
+        android:layout_marginLeft="40dp"
+        android:layout_toRightOf="@+id/car_carframnum"
+        android:textSize="18sp"
+        android:text="发动机号:" />
+
+    <EditText
+        android:id="@+id/car_motornum"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_marginLeft="17dp"
+        android:layout_toRightOf="@+id/textView3"
+        android:textSize="16sp"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="18dp"
+        android:textSize="18sp"
+        android:text="车 牌 号:" />
+
+    <EditText
+        android:id="@+id/car_driver"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView7"
+        android:layout_alignBottom="@+id/textView7"
+        android:layout_marginLeft="19dp"
+        android:layout_toRightOf="@+id/textView7"
+        android:textSize="16sp"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/car_carid"
+        android:layout_marginTop="27dp"
+        android:textSize="18sp"
+        android:text="驾驶员电话:" />
+
+    <EditText
+        android:id="@+id/car_driverPhone"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_toRightOf="@+id/textView5"
+        android:textSize="16sp"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/car_cartype"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignLeft="@+id/car_motornum"
+        android:layout_alignRight="@+id/car_motornum"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/car_yearcheckinte"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView8"
+        android:layout_alignBottom="@+id/textView8"
+        android:layout_toRightOf="@+id/textView8"
+        android:textSize="16sp"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView5"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_marginLeft="14dp"
+        android:layout_toRightOf="@+id/car_driverPhone"
+        android:textSize="18sp"
+        android:text="购车日期:" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView5"
+        android:layout_below="@+id/textView5"
+        android:layout_marginTop="22dp"
+        android:text="年检周期:"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/car_yearcheckinte"
+        android:layout_alignLeft="@+id/textView6"
+        android:textSize="18sp"
+        android:text="驾驶员:" />
+
+    <EditText
+        android:id="@+id/car_buydt"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView6"
+        android:layout_alignBottom="@+id/textView6"
+        android:layout_toLeftOf="@+id/textView4"
+        android:ems="10"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView8"
+        android:layout_toRightOf="@+id/car_driver"
+        android:text="车辆型号:"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/commitallmessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/car_cartype"
+        android:layout_alignTop="@+id/car_driver"
+        android:textSize="16sp"
+        android:text="保存所以信息" />
+
+</RelativeLayout>

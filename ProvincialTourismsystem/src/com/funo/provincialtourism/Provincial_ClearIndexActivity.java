@@ -1,11 +1,20 @@
 package com.funo.provincialtourism;
 
+import java.util.ArrayList;
+
+import android.app.ApplicationErrorReport.AnrInfo;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -13,6 +22,8 @@ import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
+import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +31,7 @@ import android.widget.TextView;
 import com.funo.antennatestsystem.R;
 import com.funo.provincialtourism.tool.Contants;
 import com.funo.provincialtourism.view.MyGridView;
+import com.funo.provincialtourism.view.MyProgressDialogBuilder;
 
 public class Provincial_ClearIndexActivity extends BaseActivity implements
 		OnGroupExpandListener {
@@ -28,6 +40,8 @@ public class Provincial_ClearIndexActivity extends BaseActivity implements
 	private ItemAdapter[] itms;
 	private ExpandableListView mExpandableListView;
 	private ProvincialMyApplicition app;
+	private Dialog pd;
+	private Mybase mybase;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +49,10 @@ public class Provincial_ClearIndexActivity extends BaseActivity implements
 		setContentView(R.layout.activity_provincial_tourism_main);
 		app = (ProvincialMyApplicition) getApplication();
 		app.addActivity(this);
+		initUI();
+		initTitle();
+		setBottombnt(getBottombnt(), 1, getBottomtv());
+		initData();
 	}
 
 	private void initTitle() {
@@ -44,10 +62,6 @@ public class Provincial_ClearIndexActivity extends BaseActivity implements
 
 	@Override
 	protected void onResume() {
-		initUI();
-		initTitle();
-		setBottombnt(getBottombnt(), 1, getBottomtv());
-		initData();
 		super.onResume();
 	}
 
@@ -59,17 +73,76 @@ public class Provincial_ClearIndexActivity extends BaseActivity implements
 		itms = new ItemAdapter[] { adapter0, adapter1, adapter2, adapter3 };
 	}
 
+	Handler mHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			int w = msg.what;
+			Boolean b = mState.get(w);
+			mState.set(w, !b);
+			mExpandableListView.expandGroup(w);
+
+		}
+	};
+	private ArrayList<Boolean> mState = new ArrayList<Boolean>();
+
 	/**
 	 * 初始化UI
 	 */
 	private void initUI() {
+		mState.clear();
+		for (int i = 0; i < Contants.CITYS.length; i++) {
+			mState.add(false);
+		}
 		itemadapter = new ItemAdapter();
 		mExpandableListView = (ExpandableListView) findViewById(R.id.expandableListView1);
-		Mybase mybase = new Mybase();
+		mybase = new Mybase();
 		mExpandableListView.setAdapter(mybase);
 		mExpandableListView.setGroupIndicator(null);
 		mExpandableListView.setOnGroupExpandListener(this);
+		
+		View dialog_prog = getLayoutInflater().inflate(
+				R.layout.show_prog, null);
+		pd = new Dialog(this,R.style.Dialog);
+		pd.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		pd.setContentView(dialog_prog);
+		
+		mExpandableListView.setOnGroupClickListener(new OnGroupClickListener() {
 
+			@Override
+			public boolean onGroupClick(ExpandableListView parent, View v,
+					int groupPosition, long id) {
+				Boolean b = mState.get(groupPosition);
+					
+				if (!b) {
+					final int p = groupPosition;
+					pd.show();
+					new Thread(new Runnable() {
+
+						public void run() {
+
+							try {
+								Thread.sleep(500);
+								pd.dismiss();
+								Message msg = new Message();
+								msg.what = p;
+								mHandler.sendMessage(msg); // 告诉主线程执行任务
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+
+						}
+
+					}).start();
+				}else
+				{
+					mState.set(groupPosition, !b);
+					return false;
+				}
+
+				return true;
+			}
+		});
 	}
 
 	/**
@@ -176,7 +249,8 @@ public class Provincial_ClearIndexActivity extends BaseActivity implements
 		@Override
 		public View getChildView(int groupPosition, int childPosition,
 				boolean isLastChild, View convertView, ViewGroup parent) {
-
+			Log.e("tag", "groupPosition:" + groupPosition + ";childPosition:"
+					+ childPosition + ";isLastChild:" + isLastChild);
 			View layout = getLayoutInflater().inflate(
 					R.layout.activity_qingxin_goupitem, null);
 			MyGridView gridView1 = (MyGridView) layout
@@ -326,6 +400,7 @@ public class Provincial_ClearIndexActivity extends BaseActivity implements
 	 */
 	@Override
 	public void onGroupExpand(int groupPosition) {
+
 		for (int i = 0, count = mExpandableListView.getExpandableListAdapter()
 				.getGroupCount(); i < count; i++) {
 			if (groupPosition != i) {// 关闭其他分组
@@ -346,28 +421,32 @@ public class Provincial_ClearIndexActivity extends BaseActivity implements
 		case R.id.bottombnt_1:
 			intent = new Intent(Provincial_ClearIndexActivity.this,
 					Provincial_MapActivity.class);
+			intent.putExtra("acitivity_num1", acitivity_num1);
+			intent.putExtra("acitivity_num3", acitivity_num3);
+			if (!acitivity_num1) {
+				startActivity(intent);
+			}
 			break;
 		case R.id.bottombnt_3:
 			intent = new Intent(Provincial_ClearIndexActivity.this,
 					Provincial_TicketActivity.class);
+			intent.putExtra("acitivity_num1", acitivity_num1);
+			intent.putExtra("acitivity_num3", acitivity_num3);
+			if (!acitivity_num3) {
+				startActivity(intent);
+			}
 			break;
 		case R.id.bottombnt_4:
 			intent = new Intent(Provincial_ClearIndexActivity.this,
 					Provincial_SettingActivity.class);
+			intent.putExtra("acitivity_num1", acitivity_num1);
+			intent.putExtra("acitivity_num3", acitivity_num3);
+			startActivity(intent);
 			break;
 		}
 		if (intent != null) {
-			if (!(acitivity_num1 || acitivity_num3)) {
-				if (acitivity_num1) {
-					intent.putExtra("acitivity_num1", acitivity_num1);
-				}
-				if (acitivity_num3) {
-					intent.putExtra("acitivity_num3", acitivity_num3);
-				}
-				startActivity(intent);
-				overridePendingTransition(R.animator.in_from_right,
-						R.animator.out_to_left);
-			}
+			overridePendingTransition(R.animator.in_from_right,
+					R.animator.out_to_left);
 			finish();
 		}
 	}

@@ -40,7 +40,7 @@ public class Provincial_SettingActivity extends BaseActivity {
 	protected void onResume() {
 		initUI();
 		initTitle();
-		setBottombnt(getBottombnt(), 3,getBottomtv());
+		setBottombnt(getBottombnt(), 3, getBottomtv());
 		super.onResume();
 	}
 
@@ -48,40 +48,37 @@ public class Provincial_SettingActivity extends BaseActivity {
 		Intent intent = null;
 		boolean acitivity_num1 = getIntent().getBooleanExtra("acitivity_num1",
 				false);
-//		boolean acitivity_num2 = getIntent().getBooleanExtra("acitivity_num2",
-//				false);
 		boolean acitivity_num3 = getIntent().getBooleanExtra("acitivity_num3",
 				false);
 		switch (v.getId()) {
 		case R.id.bottombnt_1:
 			intent = new Intent(Provincial_SettingActivity.this,
 					Provincial_MapActivity.class);
+			intent.putExtra("acitivity_num1", acitivity_num1);
+			intent.putExtra("acitivity_num3", acitivity_num3);
+			if (!acitivity_num1) {
+				startActivity(intent);
+			}
 			break;
 		case R.id.bottombnt_2:
 			intent = new Intent(Provincial_SettingActivity.this,
 					Provincial_ClearIndexActivity.class);
+			intent.putExtra("acitivity_num1", acitivity_num1);
+			intent.putExtra("acitivity_num3", acitivity_num3);
+			startActivity(intent);
 			break;
 		case R.id.bottombnt_3:
 			intent = new Intent(Provincial_SettingActivity.this,
 					Provincial_TicketActivity.class);
-		}
-		if (intent != null) {
-			if (!(acitivity_num1 || acitivity_num3)){
-				if(acitivity_num1)
-				{
-					intent.putExtra("acitivity_num1", acitivity_num1);
-				}
-				if(acitivity_num3)
-				{
-					intent.putExtra("acitivity_num3", acitivity_num3);
-				}
+			intent.putExtra("acitivity_num1", acitivity_num1);
+			intent.putExtra("acitivity_num3", acitivity_num3);
+			if (!acitivity_num3) {
 				startActivity(intent);
-				overridePendingTransition(R.animator.in_from_right,
-						R.animator.out_to_left);
-			} 
-			
-			finish();
+			}
 		}
+		overridePendingTransition(R.animator.in_from_right,
+				R.animator.out_to_left);
+		finish();
 
 	}
 

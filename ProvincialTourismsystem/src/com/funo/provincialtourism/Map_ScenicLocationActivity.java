@@ -2,49 +2,53 @@ package com.funo.provincialtourism;
 
 import java.util.ArrayList;
 
-import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.Application;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
+
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.baidu.mapapi.map.MapController;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.navisdk.BaiduNaviManager;
+import com.baidu.navisdk.BNaviEngineManager.NaviEngineInitListener;
+import com.baidu.navisdk.BaiduNaviManager.OnStartNavigationListener;
+import com.baidu.navisdk.comapi.routeplan.RoutePlanParams.NE_RoutePlan_Mode;
+import com.baidu.navisdk.util.verify.BNKeyVerifyListener;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
 import com.funo.antennatestsystem.R;
-import com.funo.provincialtourism.tool.Contants;
-import com.funo.provincialtourism.view.MyDialogBuilder;
+import com.funo.provincialtourism.fragments.Fragment1;
+import com.funo.provincialtourism.fragments.Fragment2;
+import com.funo.provincialtourism.fragments.Fragment3;
+import com.funo.provincialtourism.fragments.Fragment4;
 
 public class Map_ScenicLocationActivity extends BaseActivity {
 
 	private MapController mMapController;
 	private MapView mMapView;
-	private View rliul;
 	private Dialog shareDialog;
 	private Button[] mapbnts;
 	private ProvincialMyApplicition app;
-	private View zijingqu;
 	private String mCityname;
+	private Dialog shoucDialog;
+	private View fragment_content;
+	private ArrayList<Boolean> mState = new ArrayList<Boolean>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +56,62 @@ public class Map_ScenicLocationActivity extends BaseActivity {
 		setContentView(R.layout.activity_map_location);
 		app = (ProvincialMyApplicition) this.getApplication();
 		app.addActivity(this);
-		mSp = getSharedPreferences("saveBntnum", 0);
-		int ii = getIntent().getIntExtra("bntNum", 1);
-		Editor edit = mSp.edit();
-		edit.putInt("bntNum", ii);
-		edit.commit();
 		initUI();
 		initTitle();
 		setBottombnt(getBottombnt(), 0, getBottomtv());
+		BaiduNaviManager.getInstance().initEngine(this, getSdcardDir(),
+				mNaviEngineInitListener, "我的key", mKeyVerifyListener);
 	}
+	public static boolean mIsEngineInitSuccess = false;
+	private NaviEngineInitListener mNaviEngineInitListener = new NaviEngineInitListener() {
+		public void engineInitSuccess() {
+			// 导航初始化是异步的，需要一小段时间，以这个标志来识别引擎是否初始化成功，为true时候才能发起导航
+			mIsEngineInitSuccess = true;
+		}
+
+		public void engineInitStart() {
+			
+		}
+
+		public void engineInitFail() {
+		}
+	};
+
+	private String getSdcardDir() {
+		if (Environment.getExternalStorageState().equalsIgnoreCase(
+				Environment.MEDIA_MOUNTED)) {
+			return Environment.getExternalStorageDirectory().toString();
+		}
+		return null;
+	}
+
+	private BNKeyVerifyListener mKeyVerifyListener = new BNKeyVerifyListener() {
+
+		@Override
+		public void onVerifySucc() {
+			// TODO Auto-generated method stub
+//			 Toast.makeText(getActivity(), "key校验成功", Toast.LENGTH_LONG)
+//			 .show();
+		}
+
+		@Override
+		public void onVerifyFailed(int arg0, String arg1) {
+			// TODO Auto-generated method stub
+//			Toast.makeText(getActivity(), "key校验失败", Toast.LENGTH_LONG)
+//					.show();
+		}
+	};
+	Handler mHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			int w = msg.what;
+			Boolean b = mState.get(w);
+			// mState.set(w, !b);
+
+		}
+	};
+	private Dialog pd;
 
 	/**
 	 * 键盘监听事件
@@ -68,18 +119,6 @@ public class Map_ScenicLocationActivity extends BaseActivity {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (event.getKeyCode() == event.KEYCODE_BACK) {
-			// Intent intent = new Intent(Map_ScenicLocationActivity.this,
-			// Map_CityLocationActivity.class);
-			// intent.putExtra("cityname",
-			// getIntent().getStringExtra("cityname"));
-			// intent.putExtra("latitude",
-			// getIntent().getDoubleExtra("latitude", 0.0));
-			// intent.putExtra("longitude",
-			// getIntent().getDoubleExtra("longitude", 0.0));
-			// startActivity(intent);
-			// overridePendingTransition(R.animator.in_from_right,
-			// R.animator.out_to_left);
-			// finish();
 
 			Intent intent = new Intent(Map_ScenicLocationActivity.this,
 					Map_ScenicSpotActivity.class);
@@ -116,18 +155,6 @@ public class Map_ScenicLocationActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				// Intent intent = new Intent(Map_ScenicLocationActivity.this,
-				// Map_CityLocationActivity.class);
-				// intent.putExtra("cityname",
-				// getIntent().getStringExtra("cityname"));
-				// intent.putExtra("latitude",
-				// getIntent().getDoubleExtra("latitude", 0.0));
-				// intent.putExtra("longitude",
-				// getIntent().getDoubleExtra("longitude", 0.0));
-				// startActivity(intent);
-				// overridePendingTransition(R.animator.in_from_right,
-				// R.animator.out_to_left);
-				// finish();
 
 				Intent intent = new Intent(Map_ScenicLocationActivity.this,
 						Map_ScenicSpotActivity.class);
@@ -159,13 +186,75 @@ public class Map_ScenicLocationActivity extends BaseActivity {
 		bnt_meun.setVisibility(8);
 	}
 
+	private void showCurrentContent(int item) {
+		if (!mapbnts[item].isSelected()) {
+			fragment_content.setVisibility(0);
+			Fragment fragment = null;
+			switch (item) {
+			case 1:
+				fragment = new Fragment1();
+				break;
+			case 5:
+				fragment = new Fragment3();
+				break;
+			case 6:
+				fragment = new Fragment4();
+				break;
+			case 7:
+				fragment = new Fragment2();
+				break;
+			}
+			if (fragment != null) {
+				FragmentTransaction ft = getSupportFragmentManager()
+						.beginTransaction();
+				ft.setCustomAnimations(R.animator.in_from_right,
+						R.animator.out_to_left);
+				ft.replace(R.id.fragment_content, fragment);
+				ft.commit();
+			}
+		}
+	}
+
+	/**
+	 * 启动GPS导航. 前置条件：导航引擎初始化成功
+	 */
+	public static void launchNavigator(final Activity activity) {
+		// 这里给出一个起终点示例，实际应用中可以通过POI检索、外部POI来源等方式获取起终点坐标
+		ProvincialMyApplicition app = (ProvincialMyApplicition) activity.getApplication();
+		double latitde=app.mLatitude;
+		double longitude=app.mLongitude;
+		BaiduNaviManager.getInstance().launchNavigator(activity, latitde,
+				longitude, "目前位置", 24.443974, 118.100077, "厦门大学",
+				NE_RoutePlan_Mode.ROUTE_PLAN_MOD_MIN_TIME, // 算路方式
+				true, // 真实导航
+				BaiduNaviManager.STRATEGY_FORCE_ONLINE_PRIORITY, // 在离线策略
+				new OnStartNavigationListener() { // 跳转监听
+
+					@Override
+					public void onJumpToNavigator(Bundle configParams) {
+						Intent intent = new Intent(activity,
+								Map_BNavigatorActivity.class);
+						intent.putExtras(configParams);
+						activity.startActivity(intent);
+					}
+
+					@Override
+					public void onJumpToDownloader() {
+					}
+				});
+	}
+
 	/**
 	 * 初始化UI
 	 */
 	private void initUI() {
+		mState.clear();
+		mState.add(false);
+		mState.add(false);
+		mState.add(false);
 		mapbnts = getMapbnt();
-		setBntstyl(mapbnts, mSp.getInt("bntNum", 1));
-		rliul = (View) findViewById(R.id.rliul);
+
+		fragment_content = findViewById(R.id.fragment_content);
 		mMapView = (MapView) findViewById(R.id.bmapsView);
 		mMapController = mMapView.getController();
 		mMapController.setZoom(16);
@@ -183,137 +272,23 @@ public class Map_ScenicLocationActivity extends BaseActivity {
 		TextView jingq = (TextView) dialog_shoucang
 				.findViewById(R.id.textView2);
 		jingq.setText(getIntent().getStringExtra("cityname"));
-		shareDialog = new Dialog(this,R.style.Dialog);
+		shareDialog = new Dialog(this, R.style.Dialog);
 		shareDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		shareDialog.setContentView(sharedialog);
-		
-		shoucDialog = new Dialog(this,R.style.Dialog);
+
+		shoucDialog = new Dialog(this, R.style.Dialog);
 		shoucDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		shoucDialog.setContentView(dialog_shoucang);
+		int ii = getIntent().getIntExtra("bntNum", 1);
+		showCurrentContent(ii);
+		setBntstyl(mapbnts, ii);
 
-		zijingqu = findViewById(R.id.zijingqu);
-		GridView lists_jingqu = (GridView) findViewById(R.id.lists_jingqu);
-		lists_jingqu.setAdapter(new JingquAdapter());
-		qingxin_views = findViewById(R.id.qingxin_views);
-		setView(mSp.getInt("bntNum", 1));
-	}
+		View dialog_prog = getLayoutInflater()
+				.inflate(R.layout.show_prog, null);
+		pd = new Dialog(this, R.style.Dialog);
+		pd.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		pd.setContentView(dialog_prog);
 
-	private void setView(int indext) {
-		switch (indext) {
-		case 1:
-			qingxin_views.setVisibility(0);
-			zijingqu.setVisibility(8);
-			rliul.setVisibility(8);
-			break;
-		case 2:
-			mMapView.setVisibility(0);
-			zijingqu.setVisibility(8);
-			rliul.setVisibility(8);
-			qingxin_views.setVisibility(8);
-			break;
-		case 3:
-			shoucDialog.show();
-			break;
-
-		case 4:
-			showShare();
-			break;
-		case 5:
-			zijingqu.setVisibility(0);
-			rliul.setVisibility(8);
-			qingxin_views.setVisibility(8);
-			break;
-		case 6:
-			break;
-		case 7:
-			rliul.setVisibility(0);
-			zijingqu.setVisibility(8);
-			qingxin_views.setVisibility(8);
-			break;
-		}
-	}
-
-	private int[] images = { R.drawable.yuding_0201, R.drawable.yuding_0202,
-			R.drawable.yuding_0203, R.drawable.yuding_0204,
-			R.drawable.yuding_0205, R.drawable.yuding_0206,
-			R.drawable.yuding_0301, R.drawable.yuding_0302,
-			R.drawable.yuding_0303, R.drawable.yuding_0304,
-			R.drawable.yuding_0105 };
-	private String date[][] = { { "厦门鼓浪屿", "位于日光岩莲花庵前的巨石上有概述题字‘岩石’" },
-			{ "厦门鼓浪屿", "位于日光岩莲花庵前的巨石上有概述题字‘岩石’" }, { "日光岩", "登日光岩俯瞰鼓浪屿" },
-			{ "万国建筑", "这里是鼓浪屿中西文化交流的精萃景观。中国传统建筑，如宗教建筑..." },
-			{ "小店", "逛小店感受小清新" }, { "钢琴博物馆", "在音乐之岛聆听琴声飘飘" },
-			{ "厦门海底世界", "融生态保护，海洋知识、海洋水产、科教，观光于一体的大型海洋水..." },
-			{ "皓月园", "无论是球星、政客，还是影视巨星，你都能在这里发现，馆中塑像都..." },
-			{ "菽庄花园", "曾为私人别墅的海滨花园，远眺可见海浪、园中可见秀丽园林。" },
-			{ "郑成功纪念馆", "郑成功纪念馆是1962年为纪念郑成功收复台湾300周年而建立..." },
-			{ "钢琴码头", "如同一架三角钢琴的钢琴码头，是钢琴之岛迎接游人的起点，踏上码..." } };
-	private Dialog shoucDialog;
-	private View qingxin_views;
-	private SharedPreferences mSp;
-
-	class JingquAdapter extends BaseAdapter {
-
-		@Override
-		public int getCount() {
-
-			return images.length;
-		}
-
-		@Override
-		public Object getItem(int arg0) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public long getItemId(int arg0) {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
-		public View getView(int position, View contentView, ViewGroup arg2) {
-
-			View layout = getLayoutInflater().inflate(R.layout.scenerylistleft,
-					null);
-			TextView title = (TextView) layout.findViewById(R.id.left_title);
-			TextView info = (TextView) layout.findViewById(R.id.left_info);
-			View viewleft = layout.findViewById(R.id.viewleft);
-			View viewright = layout.findViewById(R.id.viewright);
-			ImageView image = (ImageView) layout
-					.findViewById(R.id.sceneryleft_image);
-			ImageView line_right = (ImageView) layout
-					.findViewById(R.id.line_right);
-			ImageView line_left = (ImageView) layout
-					.findViewById(R.id.line_left);
-			TextView tops = (TextView) layout.findViewById(R.id.tops);
-			TextView bottoms = (TextView) layout.findViewById(R.id.bottoms);
-			if (position % 2 == 0) {
-				line_left.setVisibility(0);
-				line_right.setVisibility(8);
-				viewleft.setVisibility(8);
-				viewright.setVisibility(0);
-				tops.setVisibility(8);
-				bottoms.setVisibility(0);
-			} else {
-				line_left.setVisibility(8);
-				viewleft.setVisibility(0);
-				viewright.setVisibility(8);
-				line_right.setVisibility(0);
-				tops.setVisibility(0);
-				bottoms.setVisibility(8);
-			}
-
-			title.setText(date[position][0]);
-			String d = date[position][1];
-			if (d.length() > 10) {
-				d = d.substring(0, 9) + "..";
-			}
-			info.setText(d);
-			image.setBackgroundResource(images[position]);
-			return layout;
-		}
 	}
 
 	@Override
@@ -377,10 +352,8 @@ public class Map_ScenicLocationActivity extends BaseActivity {
 	}
 
 	public void clickbnt(View v) {
-		int indext = 0;
 		switch (v.getId()) {
 		case R.id.mapbnt_1:
-			indext = 0;
 			Intent intent = new Intent(Map_ScenicLocationActivity.this,
 					Map_ScenicSpotActivity.class);
 			intent.putExtra("cityname_item",
@@ -404,48 +377,32 @@ public class Map_ScenicLocationActivity extends BaseActivity {
 			finish();
 			break;
 		case R.id.mapbnt_2:
-			indext = 1;
-			qingxin_views.setVisibility(0);
-			zijingqu.setVisibility(8);
-			rliul.setVisibility(8);
+			showCurrentContent(1);
+			setBntstyl(mapbnts, 1);
 			break;
 		case R.id.mapbnt_3:
-			indext = 2;
-			mMapView.setVisibility(0);
-			zijingqu.setVisibility(8);
-			rliul.setVisibility(8);
-			qingxin_views.setVisibility(8);
+			setBntstyl(mapbnts, 2);
+			fragment_content.setVisibility(8);
 			break;
 		case R.id.mapbnt_4:
-			indext = mSp.getInt("bntNum", 2);
 			shoucDialog.show();
-
 			break;
-
 		case R.id.mapbnt_5:
-			indext = 4;
 			showShare();
 			break;
 		case R.id.mapbnt_6:
-			indext = 5;
-			zijingqu.setVisibility(0);
-			rliul.setVisibility(8);
-			qingxin_views.setVisibility(8);
+			showCurrentContent(5);
+			setBntstyl(mapbnts, 5);
 			break;
 		case R.id.mapbnt_7:
-			indext = 6;
+			showCurrentContent(6);
+			setBntstyl(mapbnts, 6);
 			break;
 		case R.id.mapbnt_8:
-			indext = 7;
-			rliul.setVisibility(0);
-			zijingqu.setVisibility(8);
-			qingxin_views.setVisibility(8);
+			showCurrentContent(7);
+			setBntstyl(mapbnts, 7);
 			break;
 		}
-		Editor edit = mSp.edit();
-		edit.putInt("bntNum", indext);
-		edit.commit();
-		setBntstyl(mapbnts, indext);
 	}
 
 	public void dialog_click(View v) {
@@ -453,35 +410,33 @@ public class Map_ScenicLocationActivity extends BaseActivity {
 	}
 
 	private void showShare() {
-		shareDialog.show();
-
-		// ShareSDK.initSDK(this);
-		// OnekeyShare oks = new OnekeyShare();
-		// // 关闭sso授权
-		// oks.disableSSOWhenAuthorize();
-		//
-		// // 分享时Notification的图标和文字
-		// oks.setNotification(R.drawable.ic_launcher,
-		// getString(R.string.app_name));
-		// // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
-		// oks.setTitle(getString(R.string.share));
-		// // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-		// oks.setTitleUrl("http://sharesdk.cn");
-		// // text是分享文本，所有平台都需要这个字段
-		// oks.setText("我是分享文本");
-		// // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-		// oks.setImagePath("/sdcard/test.jpg");
-		// // url仅在微信（包括好友和朋友圈）中使用
-		// oks.setUrl("http://sharesdk.cn");
-		// // comment是我对这条分享的评论，仅在人人网和QQ空间使用
-		// oks.setComment("我是测试评论文本");
-		// // site是分享此内容的网站名称，仅在QQ空间使用
-		// oks.setSite(getString(R.string.app_name));
-		// // siteUrl是分享此内容的网站地址，仅在QQ空间使用
-		// oks.setSiteUrl("http://sharesdk.cn");
-		//
-		// // 启动分享GUI
-		// oks.show(this);
+		// shareDialog.show();
+		ShareSDK.initSDK(this);
+		OnekeyShare oks = new OnekeyShare();
+		// 关闭sso授权
+		oks.disableSSOWhenAuthorize();
+		// 分享时Notification的图标和文字
+		oks.setNotification(R.drawable.yuding_0101,
+				getString(R.string.app_name));
+		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+		oks.setTitle(getString(R.string.share));
+		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+		oks.setTitleUrl("http://sharesdk.cn");
+		// text是分享文本，所有平台都需要这个字段
+		oks.setText("我是分享文本");
+		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+		oks.setImagePath("/sdcard/test.jpg");
+		// url仅在微信（包括好友和朋友圈）中使用
+		oks.setUrl("http://sharesdk.cn");
+		// comment是我对这条分享的评论，仅在人人网和QQ空间使用
+		oks.setComment("我是测试评论文本");
+		// site是分享此内容的网站名称，仅在QQ空间使用
+		oks.setSite(getString(R.string.app_name));
+		// siteUrl是分享此内容的网站地址，仅在QQ空间使用
+		oks.setSiteUrl("http://sharesdk.cn");
+		oks.setDialogMode();
+		// 启动分享GUI
+		oks.show(this);
 	}
 
 	public void share(View v) {

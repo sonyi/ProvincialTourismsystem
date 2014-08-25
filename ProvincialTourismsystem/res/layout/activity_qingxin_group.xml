@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                  android:layout_gravity="bottom|right"
                 android:background="@drawable/down_icon"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="20dp"
                />
         </LinearLayout>
 
@@ -120,17 +120,15 @@
                     android:textColor="@color/qingxin_grouptv1" />
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <TextView
-        android:id="@+id/showLine"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginRight="10dp"
-        android:visibility="gone"
-        android:layout_toRightOf="@+id/imageView1"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
-        android:background="@color/bottom_line" />
+        <TextView
+            android:id="@+id/showLine"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/bottom_line" />
+
+    </LinearLayout>
 
 </RelativeLayout>

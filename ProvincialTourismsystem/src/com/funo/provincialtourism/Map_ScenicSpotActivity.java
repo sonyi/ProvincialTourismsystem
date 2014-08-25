@@ -6,6 +6,7 @@ import java.util.Date;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -20,11 +21,15 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.funo.antennatestsystem.R;
 import com.funo.provincialtourism.tool.Contants;
@@ -40,6 +45,8 @@ public class Map_ScenicSpotActivity extends BaseActivity {
 	private TextView tv_jia;
 	private TextView tv_jianj;
 	private ProvincialMyApplicition app;
+	private Dialog shareDialog;
+	private Dialog shoucDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +54,15 @@ public class Map_ScenicSpotActivity extends BaseActivity {
 		setContentView(R.layout.activity_yudings);
 		app = (ProvincialMyApplicition) getApplication();
 		app.addActivity(this);
-	}
-
-	@Override
-	protected void onResume() {
 		initTitle();
 		initUI();
 		initDate();
 		setBottombnt(getBottombnt(), 0, getBottomtv());
+	}
+
+	@Override
+	protected void onResume() {
+
 		super.onResume();
 	}
 
@@ -104,28 +112,6 @@ public class Map_ScenicSpotActivity extends BaseActivity {
 						R.animator.out_to_left);
 				finish();
 
-				// Intent intent = new Intent(Map_ScenicSpotActivity.this,
-				// Map_ScenicLocationActivity.class);
-				// intent.putExtra("cityname_item",
-				// getIntent().getStringExtra("cityname_item"));
-				// intent.putExtra("latitude_item",
-				// getIntent().getDoubleExtra("latitude_item", 0.0));
-				// intent.putExtra("longitude_item",
-				// getIntent().getDoubleExtra("longitude_item", 0.0));
-				// intent.putExtra("groupPosition",
-				// getIntent().getIntExtra("groupPosition", 1));
-				// intent.putExtra("childPosition",
-				// getIntent().getIntExtra("childPosition", 0));
-				// intent.putExtra("cityname",
-				// getIntent().getStringExtra("cityname"));
-				// intent.putExtra("latitude",
-				// getIntent().getDoubleExtra("latitude", 0.0));
-				// intent.putExtra("longitude",
-				// getIntent().getDoubleExtra("longitude", 0.0));
-				// startActivity(intent);
-				// overridePendingTransition(R.animator.in_from_right,
-				// R.animator.out_to_left);
-				// finish();
 			}
 		});
 		Intent intent = getIntent();
@@ -150,6 +136,21 @@ public class Map_ScenicSpotActivity extends BaseActivity {
 		pricehua.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 		Button mapbnt_1 = (Button) findViewById(R.id.mapbnt_1);
 		mapbnt_1.setSelected(true);
+
+		View sharedialog = getLayoutInflater().inflate(R.layout.sharedialog,
+				null);
+		View dialog_shoucang = getLayoutInflater().inflate(
+				R.layout.dialog_shoucang, null);
+		TextView jingq = (TextView) dialog_shoucang
+				.findViewById(R.id.textView2);
+
+		shareDialog = new Dialog(this, R.style.Dialog);
+		shareDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		shareDialog.setContentView(sharedialog);
+
+		shoucDialog = new Dialog(this, R.style.Dialog);
+		shoucDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		shoucDialog.setContentView(dialog_shoucang);
 	}
 
 	/**
@@ -209,6 +210,40 @@ public class Map_ScenicSpotActivity extends BaseActivity {
 
 	}
 
+	public void share(View v) {
+		// shareDialog.dismiss();
+		ShareSDK.initSDK(this);
+		OnekeyShare oks = new OnekeyShare();
+		// 关闭sso授权
+		oks.disableSSOWhenAuthorize();
+		// 分享时Notification的图标和文字
+		oks.setNotification(R.drawable.yuding_0101,
+				getString(R.string.app_name));
+		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+		oks.setTitle(getString(R.string.share));
+		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+		oks.setTitleUrl("http://sharesdk.cn");
+		// text是分享文本，所有平台都需要这个字段
+		oks.setText("我是分享文本");
+		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+		oks.setImagePath("/sdcard/test.jpg");
+		// url仅在微信（包括好友和朋友圈）中使用
+		oks.setUrl("http://sharesdk.cn");
+		// comment是我对这条分享的评论，仅在人人网和QQ空间使用
+		oks.setComment("我是测试评论文本");
+		// site是分享此内容的网站名称，仅在QQ空间使用
+		oks.setSite(getString(R.string.app_name));
+		// siteUrl是分享此内容的网站地址，仅在QQ空间使用
+		oks.setSiteUrl("http://sharesdk.cn");
+		oks.setDialogMode();
+		// 启动分享GUI
+		oks.show(this);
+	}
+
+	public void dialog_click(View v) {
+		shoucDialog.dismiss();
+	}
+
 	public void clickbnt(View v) {
 		int index = 0;
 		switch (v.getId()) {
@@ -220,10 +255,12 @@ public class Map_ScenicSpotActivity extends BaseActivity {
 			break;
 		case R.id.mapbnt_4:
 			index = 3;
+			shoucDialog.show();
 			break;
 
 		case R.id.mapbnt_5:
 			index = 4;
+			showShare();
 			break;
 
 		case R.id.mapbnt_6:
@@ -236,6 +273,9 @@ public class Map_ScenicSpotActivity extends BaseActivity {
 			index = 7;
 			break;
 
+		}
+		if (index == 3 || index == 4) {
+			return;
 		}
 		Intent intent = new Intent(this, Map_ScenicLocationActivity.class);
 		intent.putExtra("cityname_item",
@@ -255,6 +295,36 @@ public class Map_ScenicSpotActivity extends BaseActivity {
 		intent.putExtra("bntNum", index);
 		startActivity(intent);
 		finish();
+	}
+
+	private void showShare() {
+//		shareDialog.show();
+		ShareSDK.initSDK(this);
+		OnekeyShare oks = new OnekeyShare();
+		// 关闭sso授权
+		oks.disableSSOWhenAuthorize();
+		// 分享时Notification的图标和文字
+		oks.setNotification(R.drawable.yuding_0101,
+				getString(R.string.app_name));
+		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+		oks.setTitle(getString(R.string.share));
+		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+		oks.setTitleUrl("http://sharesdk.cn");
+		// text是分享文本，所有平台都需要这个字段
+		oks.setText("我是分享文本");
+		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+		oks.setImagePath("/sdcard/test.jpg");
+		// url仅在微信（包括好友和朋友圈）中使用
+		oks.setUrl("http://sharesdk.cn");
+		// comment是我对这条分享的评论，仅在人人网和QQ空间使用
+		oks.setComment("我是测试评论文本");
+		// site是分享此内容的网站名称，仅在QQ空间使用
+		oks.setSite(getString(R.string.app_name));
+		// siteUrl是分享此内容的网站地址，仅在QQ空间使用
+		oks.setSiteUrl("http://sharesdk.cn");
+		oks.setDialogMode();
+		// 启动分享GUI
+		oks.show(this);
 	}
 
 	@Override

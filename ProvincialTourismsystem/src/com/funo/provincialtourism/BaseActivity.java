@@ -2,23 +2,21 @@ package com.funo.provincialtourism;
 
 import java.util.ArrayList;
 
-import com.funo.antennatestsystem.R;
-
-import android.app.ActionBar;
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
+import android.support.v4.app.FragmentActivity;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-public class BaseActivity extends Activity {
+import com.funo.antennatestsystem.R;
+
+public class BaseActivity extends FragmentActivity {
 	public static Button[] mBottombnts;
 	private boolean b = false;
-	public TextView title;
+	public Button title;
 	public Button bnt_meun;
 	public Button bnt_back;
+	public ImageView select;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -28,12 +26,13 @@ public class BaseActivity extends Activity {
 	}
 
 	public void initTitlebase() {
-		title = (TextView) findViewById(
+		title = (Button) findViewById(
 				R.id.tv_title);
 		bnt_back = (Button) findViewById(
 				R.id.bnt_back);
 		bnt_meun = (Button) findViewById(
 				R.id.bnt_meun);
+		select = (ImageView) findViewById(R.id.select);
 	}
 
 	public Button[] getBottombnt() {

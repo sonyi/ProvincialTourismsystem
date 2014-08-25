@@ -13,7 +13,7 @@
         android:layout_marginLeft="20dp"
         android:drawableRight="@drawable/more"
         android:paddingRight="10dp"
-        android:textColor="@color/text_colors"
+        android:textSize="@dimen/notify_tv15"
         />
 
 

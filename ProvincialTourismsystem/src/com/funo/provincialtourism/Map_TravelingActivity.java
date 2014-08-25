@@ -33,6 +33,10 @@ public class Map_TravelingActivity extends BaseActivity implements
 		setContentView(R.layout.activity_touris);
 		app = (ProvincialMyApplicition) this.getApplication();
 		app.addActivity(this);
+		initUI();
+		initTitle();
+		setBottombnt(getBottombnt(), 0,getBottomtv());
+		initData();
 	}
 
 	/**
@@ -59,10 +63,7 @@ public class Map_TravelingActivity extends BaseActivity implements
 
 	@Override
 	protected void onResume() {
-		initUI();
-		initTitle();
-		setBottombnt(getBottombnt(), 0,getBottomtv());
-		initData();
+		
 		super.onResume();
 	}
 

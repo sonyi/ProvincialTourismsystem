@@ -6,5 +6,5 @@
            android:color="@color/ticket_line"
            />
        <solid android:color="@color/titlebar_tv"/>
-       <corners android:radius="10dp"/>
+       <corners android:radius="5dp"/>
 </shape>

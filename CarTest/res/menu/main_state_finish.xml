@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/action_finish"
+        android:orderInCategory="1"
+        android:showAsAction="never"
+        android:title="完成施工"/>
+    <item
+        android:id="@+id/action_cancel"
+        android:orderInCategory="3"
+        android:showAsAction="never"
+        android:title="取消施工"/>
+
+</menu>

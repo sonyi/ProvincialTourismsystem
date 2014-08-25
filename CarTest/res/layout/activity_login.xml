@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/relative_layout01"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="#F79331" >
+
+        <TextView
+            android:id="@+id/tv_login_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="欢迎使用车掌柜客户端"
+            android:textColor="#ffffff"
+            android:textSize="30sp" />
+
+        <RelativeLayout
+            android:id="@+id/relative_layout02"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/tv_car_construct_title" >
+
+            <!--
+                 <ImageView
+                android:id="@+id/iv_login_back"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/returnback" />
+            -->
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_layout03"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@id/relative_layout01" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/logo"
+            android:scaleType="fitXY" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_layout04"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/relative_layout03"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" >
+
+        <EditText
+            android:id="@+id/et_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/grey"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="请输入账户"
+            android:inputType="textPersonName"
+            android:text="admin"
+            android:textSize="50sp" >
+
+            <requestFocus />
+        </EditText>
+
+        <ImageView
+            android:id="@+id/iv_img_user"
+            android:layout_width="240dp"
+            android:layout_height="80dp"
+            android:layout_alignTop="@id/et_user_name"
+            android:layout_margin="10dp"
+            android:layout_toLeftOf="@id/et_user_name"
+            android:background="@drawable/people" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_below="@id/et_user_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/grey"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:text="admin"
+            android:textSize="50sp" />
+
+        <ImageView
+            android:id="@+id/iv_img_password"
+            android:layout_width="240dp"
+            android:layout_height="80dp"
+            android:layout_alignTop="@id/et_password"
+            android:layout_margin="10dp"
+            android:layout_toLeftOf="@id/et_password"
+            android:background="@drawable/password" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@id/et_password"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/head"
+            android:gravity="center"
+            android:text="登录"
+            android:textColor="#ffffff"
+            android:textSize="50sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

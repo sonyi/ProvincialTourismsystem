@@ -265,7 +265,7 @@
                     android:layout_margin="15dp"
                     android:lineSpacingExtra="3dp"
                     android:lineSpacingMultiplier="1.5"
-                    android:textColor="@color/text_6c" />
+                     />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

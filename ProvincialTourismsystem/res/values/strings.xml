@@ -13,6 +13,7 @@
     <string name="provincial_name7">三明市</string>
     <string name="provincial_name8">南平市</string>
     <string name="provincial_name9">宁德市</string>
+    
     <string name="yuding_zynum">在园人数</string>
     <string name="yuding_zl">开放时间: </string>
     <string name="yuding_xk">电话: </string>
@@ -42,7 +43,7 @@
     <string name="map_bnt4">收藏</string>
     <string name="map_bnt5">分享</string>
     <string name="map_bnt6">子景点</string>
-    <string name="map_bnt7">视频</string>
+    <string name="map_bnt7">周边</string>
     <string name="map_bnt8">人流量</string>
     <string name="map_viewbnt1">最新通知</string>
     <string name="map_viewbnt2">本地特色</string>
@@ -67,4 +68,6 @@
     <string name="ticket_title2">厦门市思明区镇海路</string>
     <string name="ticket_title3">请选择城市</string>
     <string name="ticket_title4">当季热销</string>
+    <string name="zhoubian_dzl">到这里</string>
+    <string name="zhoubian_dh">电话</string>
 </resources>

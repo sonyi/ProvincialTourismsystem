@@ -26,9 +26,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
 import com.baidu.mapapi.BMapManager;
 import com.baidu.mapapi.map.Geometry;
 import com.baidu.mapapi.map.GraphicsOverlay;

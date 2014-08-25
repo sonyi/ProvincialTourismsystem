@@ -1,114 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/map_toum" >
+    android:layout_width="fill_parent"
+    android:layout_height="150dp" >
 
-    <FrameLayout
+    <ImageView
+        android:id="@+id/iv_view_left_circle_line"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/circle_line" />
+
+    <RelativeLayout
+        android:id="@+id/rel_view_fram_left"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toLeftOf="@id/iv_view_left_circle_line" >
 
-        <RelativeLayout
+        <FrameLayout
+            android:id="@+id/fl_view_left_framelayout"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true" >
+
+            <ImageView
+                android:id="@+id/iv_view_sceneryleft_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/circle_green" />
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/iv_view_left_place_line"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="28dp"
+            android:layout_toRightOf="@+id/fl_view_left_framelayout"
+            android:scaleType="fitXY"
+            android:src="@drawable/place_line" />
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tops"
-                android:layout_width="match_parent"
-                android:layout_height="15dp"
-                android:visibility="gone" />
+    <TextView
+        android:id="@+id/tv_view_left_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_view_fram_left"
+        android:layout_marginLeft="10dp"
+        android:layout_toLeftOf="@id/iv_view_left_circle_line"
+        android:gravity="center_horizontal"
+        android:maxLength="20"
+        android:singleLine="true"
+        android:text="dsaasdssss"
+        android:textColor="#59b273"
+        android:textSize="16sp" />
 
-            <RelativeLayout
-                android:id="@+id/top"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tops" >
-
-                <ImageView
-                    android:id="@+id/line_right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/place_line"
-                    android:layout_marginLeft="10dp"
-                    android:visibility="gone" />
-
-                <FrameLayout
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp" >
-
-                    <ImageView
-                        android:id="@+id/sceneryleft_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/circle_green" />
-                </FrameLayout>
-
-                <ImageView
-                    android:id="@+id/line_left"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/place_line"
-                    android:layout_marginRight="10dp"
-                    android:visibility="gone" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/top"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/left_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="dsaasd"
-                    android:textColor="#59b273"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/left_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="dsaasd"
-                    android:textColor="#999999"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/bottoms"
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:visibility="gone" />
-            </LinearLayout>
-        </RelativeLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:id="@+id/viewleft"
-             android:visibility="gone"
-            android:background="@color/titlebar_bg" />
-
-        <View
-            android:layout_width="1dp"
-            android:id="@+id/viewright"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:visibility="gone"
-            android:background="@color/titlebar_bg" />
-    </FrameLayout>
+    <TextView
+        android:id="@+id/tv_view_left_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_view_left_title"
+        android:layout_marginLeft="10dp"
+        android:layout_toLeftOf="@id/iv_view_left_circle_line"
+        android:gravity="center_horizontal"
+        android:maxLength="40"
+        android:maxLines="2"
+        android:text="dsaasdssssaaaaaaaaaaaaaaaaaaaaaaaaa"
+        android:textColor="#999999"
+        android:textSize="14sp" />
 
 </RelativeLayout>

@@ -80,7 +80,7 @@ public class Traveling_itemActivity extends BaseActivity implements
 	private void initUi() {
 		map_bntvs = (View) findViewById(R.id.map_bntvs);
 		TextView messages = (TextView) findViewById(R.id.message);
-		messages.setText("        每年中秋节厦门要举行中秋博饼的传统活动。/n"
+		messages.setText("        每年中秋节厦门要举行中秋博饼的传统活动。 "+"\n"
 				+ "据说在 300多年前郑成功据厦抗清，郑的部将洪旭为了宽释士兵愁绪，激励鼓舞士气，利于驱逐荷兰殖民者收复台湾，于是与当年驻扎在今洪本部33～44号的后部衙堂属员，经过一番推敲，巧妙设计中秋会饼，让全体将士在凉爽的中秋夜晚欢快拼搏。\n\n\t"
 				+ "戏饼以“会”计算，一般一“会”以四五人为宜。“会”饼模仿科举制，设状元饼(最大的)一个、对堂(榜眼)饼二个、三红(探花)饼四个、四进(进士)饼八个、二举(举人)饼16个、一秀(秀才)饼32个。这是象征古代四级科举考试。古代府级考试及第的童生称秀才；\n\n\t"
 				+ "乡试(省级)考中者称举人；在京师礼部会度及第者称贡生；由皇帝亲自主持的殿度及第者称进士，其中又分三甲：一甲三名，即状元、榜眼、探花，俗称三鼎甲或三及第；二甲名额较多，三甲就更多了。古代皇帝点状元，既看才，又看貌，还要推敲，考究姓氏和名字，\n\n\t"

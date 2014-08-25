@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+
+<TextView
+    android:id="@+id/textView1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/textView1"
+    android:layout_marginLeft="13dp"
+    android:layout_marginTop="12dp"
+    android:textSize="18sp"
+    android:text="客户名称:" />
+
+<EditText
+    android:id="@+id/custom_name"
+    android:layout_width="140dp"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/textView1"
+    android:layout_alignBottom="@+id/textView1"
+    android:layout_toRightOf="@+id/textView1"
+    android:textSize="16sp"
+    android:ems="10" >
+
+    <requestFocus />
+</EditText>
+
+<TextView
+    android:id="@+id/textView2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/custom_name"
+    android:layout_alignBottom="@+id/custom_name"
+    android:layout_marginLeft="40dp"
+    android:layout_toRightOf="@+id/custom_name"
+    android:textSize="18sp"
+    android:text="联系人电话:" />
+
+<EditText
+    android:id="@+id/custom_othertelephone"
+    android:layout_width="140dp"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/textView2"
+    android:layout_alignBottom="@+id/textView2"
+    android:layout_toRightOf="@+id/textView2"
+    android:textSize="16sp"
+    android:ems="10" />
+
+<TextView
+    android:id="@+id/textView3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/custom_othertelephone"
+    android:layout_alignBottom="@+id/custom_othertelephone"
+    android:layout_marginLeft="44dp"
+    android:layout_toRightOf="@+id/custom_othertelephone"
+    android:textSize="18sp"
+    android:text="客户来源:" />
+
+<EditText
+    android:id="@+id/custom_come"
+    android:layout_width="140dp"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/textView3"
+    android:layout_alignBottom="@+id/textView3"
+    android:layout_toRightOf="@+id/textView3"
+    android:textSize="16sp"
+    android:ems="10" />
+
+<EditText
+    android:id="@+id/custom_remark"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/textView4"
+    android:layout_alignBottom="@+id/textView4"
+    android:layout_toLeftOf="@+id/textView2"
+    android:layout_toRightOf="@+id/textView4"
+    android:ems="10" />
+
+<TextView
+    android:id="@+id/textView6"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/custom_bitrhday"
+    android:layout_alignLeft="@+id/textView2"
+    android:textSize="18sp"
+    android:text="联系电话:" />
+
+<EditText
+    android:id="@+id/custom_otherpeople"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/custom_mobile"
+    android:layout_alignBottom="@+id/custom_mobile"
+    android:layout_alignRight="@+id/custom_come"
+    android:layout_toRightOf="@+id/textView7"
+    android:textSize="16sp"
+    android:ems="10" />
+
+<TextView
+    android:id="@+id/textView10"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/custom_fax"
+    android:layout_alignLeft="@+id/textView6"
+    android:textSize="18sp"
+    android:text="工作单位:" />
+
+<EditText
+    android:id="@+id/custom_workphone"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/textView10"
+    android:layout_alignBottom="@+id/textView10"
+    android:layout_alignLeft="@+id/custom_come"
+    android:layout_alignRight="@+id/custom_otherpeople"
+    android:ems="10" />
+
+<TextView
+    android:id="@+id/textView7"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/custom_otherpeople"
+    android:layout_alignRight="@+id/textView3"
+    android:textSize="18sp"
+    android:text="其他联系人:" />
+
+<TextView
+    android:id="@+id/textView4"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/textView13"
+    android:layout_below="@+id/custom_telephone"
+    android:layout_marginTop="16dp"
+    android:textSize="18sp"
+    android:text="备       注:" />
+
+<EditText
+    android:id="@+id/custom_bitrhday"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_alignRight="@+id/custom_name"
+    android:layout_below="@+id/custom_name"
+    android:layout_marginTop="12dp"
+    android:layout_toRightOf="@+id/textView5"
+    android:ems="10" />
+
+<EditText
+    android:id="@+id/custom_mobile"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/custom_workplace"
+    android:layout_alignLeft="@+id/custom_othertelephone"
+    android:layout_toLeftOf="@+id/textView3"
+    android:textSize="16sp"
+    android:ems="10" />
+
+<EditText
+    android:id="@+id/custom_workplace"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/custom_telephone"
+    android:layout_below="@+id/textView6"
+    android:layout_marginTop="10dp"
+    android:layout_toLeftOf="@+id/textView3"
+    android:ems="10" />
+
+<EditText
+    android:id="@+id/custom_fax"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/textView9"
+    android:layout_alignLeft="@+id/custom_bitrhday"
+    android:layout_toLeftOf="@+id/textView2"
+    android:ems="10"
+    android:textSize="16sp" />
+
+<TextView
+    android:id="@+id/textView5"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/custom_bitrhday"
+    android:layout_toLeftOf="@+id/custom_name"
+    android:text="出生日期:"
+    android:textSize="18sp" />
+
+<TextView
+    android:id="@+id/textView9"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/custom_workplace"
+    android:layout_alignLeft="@+id/textView5"
+    android:text="传        真:"
+    android:textSize="18sp" />
+
+<EditText
+    android:id="@+id/custom_telephone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/custom_workphone"
+    android:layout_marginTop="12dp"
+    android:layout_toLeftOf="@+id/textView3"
+    android:layout_toRightOf="@+id/textView14"
+    android:ems="10" />
+
+<EditText
+    android:id="@+id/custom_address"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/custom_fax"
+    android:layout_alignTop="@+id/custom_telephone"
+    android:layout_toLeftOf="@+id/textView2"
+    android:ems="10"
+    android:textSize="16sp" />
+
+<TextView
+    android:id="@+id/textView13"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/custom_telephone"
+    android:layout_alignBottom="@+id/custom_telephone"
+    android:layout_alignLeft="@+id/textView9"
+    android:text="地       址:"
+    android:textSize="18sp" />
+
+<EditText
+    android:id="@+id/custom_zip"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/custom_workphone"
+    android:layout_alignRight="@+id/custom_workphone"
+    android:layout_alignTop="@+id/textView14"
+    android:ems="10"
+    android:textSize="16sp" />
+
+<TextView
+    android:id="@+id/textView12"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/custom_zip"
+    android:layout_alignBottom="@+id/custom_zip"
+    android:layout_alignLeft="@+id/textView11"
+    android:text="邮政编码:"
+    android:textSize="18sp" />
+
+<TextView
+    android:id="@+id/textView11"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/custom_telephone"
+    android:layout_alignRight="@+id/textView7"
+    android:text="单位电话:"
+    android:textSize="18sp" />
+
+<TextView
+    android:id="@+id/textView8"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/custom_remark"
+    android:layout_alignRight="@+id/textView14"
+    android:text=""
+    android:textSize="18sp" />
+
+<TextView
+    android:id="@+id/textView14"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/textView4"
+    android:layout_alignLeft="@+id/textView10"
+    android:text="手机号码:"
+    android:textSize="18sp" />
+
+</RelativeLayout>

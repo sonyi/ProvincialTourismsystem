@@ -9,25 +9,28 @@
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:background="@drawable/childer_line" />
+        android:background="@drawable/childer_line"
+        android:scaleType="fitXY" />
 
     <LinearLayout
+        android:id="@+id/showGrid"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:layout_margin="3dp"
-        android:background="@drawable/qingxin_graybg" >
+        android:layout_weight="1"
+        android:background="@drawable/qingxin_graybg"
+        android:orientation="vertical" >
+
 
         <com.funo.provincialtourism.view.MyGridView
             android:id="@+id/gridView1"
-            android:listSelector="@drawable/listselect"
-            android:scrollingCache="false"
-            android:fadingEdge="none"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/map_toum"
-            android:numColumns="2" />
+            android:fadingEdge="none"
+            android:listSelector="@drawable/listselect"
+            android:numColumns="2"
+            android:scrollingCache="false" />
     </LinearLayout>
 
 </LinearLayout>

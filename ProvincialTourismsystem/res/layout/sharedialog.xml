@@ -12,7 +12,8 @@
         android:layout_centerHorizontal="true"
         android:background="@color/titlebar_tv"
         android:gravity="center"
-        android:paddingTop="20dp"
+        android:paddingTop="10dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/sharedialog_t0"
         android:textSize="@dimen/qingxin_tv24" />
 
@@ -36,8 +37,8 @@
         <Button
             style="@style/share_bntstly"
             android:drawableTop="@drawable/share_wx"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:text="@string/sharedialog_t2" />
 
         <Button
@@ -65,8 +66,8 @@
         <Button
             style="@style/share_bntstly"
             android:drawableTop="@drawable/share_qzone"
-             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+             android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:text="@string/sharedialog_t5" />
 
         <Button
